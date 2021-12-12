@@ -2,12 +2,12 @@ mod parse;
 mod uncraft;
 mod backpack;
 
-use std::collections::HashMap;
 use uncraft::Uncrafter;
+use backpack::Backpack;
 
 fn main() {
 
-    let inventory = HashMap::from([
+    let inventory = Backpack::from([
         ("flint", 10),
         ("iron ingot", 5),
         ("copper ingot", 10),
@@ -18,10 +18,6 @@ fn main() {
         ("glass", 5),
     ]);
     println!("{:?}", inventory);
-
-    let tuples = [("one", 1), ("two", 2)];
-    let test: HashMap<_,_> = tuples.into_iter().collect();
-    println!("{:?}", test);
 
     let mut uc = Uncrafter::new();
     uc.execute();

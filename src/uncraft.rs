@@ -37,7 +37,7 @@ impl Uncrafter {
         let mut raw_materials = Backpack::new();
 
         for ingredient in recipe.ingredients.iter().filter_map(|x| x.as_ref()) {
-            println!("{}", ingredient);
+            // println!("{}", ingredient);
             if self.recipes_that_exist.contains(ingredient) {
                 // uncraft it an add the result
                 raw_materials += self.uncraft(ingredient);

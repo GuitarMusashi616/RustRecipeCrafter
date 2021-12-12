@@ -9,7 +9,7 @@ pub struct Backpack {
 }
 
 impl Backpack {
-    pub fn new() -> Backpack {
+    pub fn new() -> Self {
         let contents = HashMap::new();
         Backpack {
             contents,
@@ -32,6 +32,14 @@ impl Backpack {
 impl AddAssign for Backpack {
     fn add_assign(&mut self, rhs: Self) {
         rhs.contents.iter().for_each(|(item,amount)|self.add_multiple(item, *amount))
+    }
+}
+
+impl<const N: usize> From<[(&str, u32); N]> for Backpack {
+    fn from(arr: [(&str, u32); N]) -> Self {
+        let mut backpack = Backpack::new();
+        arr.iter().for_each(|(item_name, amount)|backpack.add_multiple(item_name, *amount));
+        backpack
     }
 }
 
