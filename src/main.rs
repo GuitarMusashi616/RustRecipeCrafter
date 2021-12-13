@@ -4,12 +4,13 @@ mod backpack;
 
 use uncraft::Uncrafter;
 use backpack::Backpack;
+use std::io::stdin;
 
 fn main() {
-
     let inventory = Backpack::from([
         ("flint", 10),
         ("iron ingot", 5),
+        ("copper gear", 1),
         ("copper ingot", 10),
         ("gold ingot", 3),
         ("redstone", 5),
@@ -17,15 +18,9 @@ fn main() {
         ("wooden planks", 64),
         ("glass", 5),
     ]);
-    println!("{:?}", inventory);
-
     let mut uc = Uncrafter::new();
-    uc.execute();
-    // uc.uncraft("machine frame");
-    // println!("{:?}", uc.recipes_that_exist);
-    // println!("{:?}", uc.raw_materials_for_recipe);
-
-    // for each recipe and inventory item uncraft them
+    uc.check_recipes(inventory);
+    stdin().read_line(&mut "stuff".to_string());
 }
 
 

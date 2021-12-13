@@ -5,7 +5,7 @@ use std::ops::AddAssign;
 
 #[derive(Debug)]
 pub struct Backpack {
-    contents: HashMap<String, u32>,
+    pub contents: HashMap<String, u32>,
 }
 
 impl Backpack {
@@ -16,7 +16,7 @@ impl Backpack {
         }
     }
 
-    pub fn add_multiple(&mut self, item: &str, amount: u32) {
+    pub fn add(&mut self, item: &str, amount: u32) {
         if !self.contents.contains_key(item) {
             self.contents.insert(item.to_string(), 0);
         }
@@ -24,21 +24,46 @@ impl Backpack {
         *count += amount;
     }
 
-    pub fn add(&mut self, item: &str) {
-        self.add_multiple(item, 1);
+    pub fn contains(&self, item: &str, amount: u32) -> bool {
+        match self.contents.get(item) {
+            Some(count) => *count >= amount,
+            None => false,
+        }
+    }
+
+    pub fn contains_all(&self, backpack: &Backpack) -> bool {
+        for (item, amount) in backpack.contents.iter() {
+            if !self.contains(item, *amount) {
+                return false
+            }
+        }
+        true
+    }
+
+    pub fn contains_all_x_times(&self, backpack: &Backpack) -> u32 {
+        backpack.contents
+            .iter()
+            .map(|(item, amount_needed_for_one)| {
+                match self.contents.get(item) {
+                    Some(amount_owned) => amount_owned / amount_needed_for_one,
+                    None => 0,
+                }
+            })
+            .min()
+            .unwrap_or(0)
     }
 }
 
 impl AddAssign for Backpack {
     fn add_assign(&mut self, rhs: Self) {
-        rhs.contents.iter().for_each(|(item,amount)|self.add_multiple(item, *amount))
+        rhs.contents.iter().for_each(|(item,amount)|self.add(item, *amount))
     }
 }
 
 impl<const N: usize> From<[(&str, u32); N]> for Backpack {
     fn from(arr: [(&str, u32); N]) -> Self {
         let mut backpack = Backpack::new();
-        arr.iter().for_each(|(item_name, amount)|backpack.add_multiple(item_name, *amount));
+        arr.iter().for_each(|(item_name, amount)|backpack.add(item_name, *amount));
         backpack
     }
 }
