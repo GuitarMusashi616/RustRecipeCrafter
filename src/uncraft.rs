@@ -1,4 +1,4 @@
-use std::collections::{HashSet, HashMap};
+use std::collections::HashMap;
 use crate::backpack::Backpack;
 use crate::parse::{csv_to_manual_struct, Pattern};
 
@@ -9,18 +9,21 @@ pub struct Uncrafter {
 }
 
 impl Uncrafter {
-    pub fn new() -> Uncrafter {
+    pub fn new(recipes_vec: Vec<Pattern>) -> Self {
         // create the recipe exist set and init the hash map
-        let recipes_vec = csv_to_manual_struct();
-
         let recipes_map: HashMap<String, Pattern> = recipes_vec.into_iter().map(|pattern|((&pattern.name).to_string(), pattern)).collect();
 
         let raw_materials_for_recipe: HashMap<String, Backpack> = HashMap::new();
 
-        Uncrafter {
+        Self {
             recipes_map,
             raw_materials_for_recipe,
         }
+    }
+
+    pub fn from_path(path: &str) -> Self {
+        let recipes_vec = csv_to_manual_struct(path);
+        return Self::new(recipes_vec);
     }
 
     pub fn uncraft(&self, recipe_name: &str, count: u32) -> Backpack {
@@ -46,6 +49,7 @@ impl Uncrafter {
         for recipe_name in self.recipes_map.keys() {
             self.raw_materials_for_recipe.insert(recipe_name.to_string(),self.uncraft(recipe_name, 1));
         }
+        println!("Recipe Contents: ");
         for (recipe_name, backpack) in self.raw_materials_for_recipe.iter(){
             println!("{:?}", recipe_name);
             println!("{:?}\n", backpack);
@@ -62,7 +66,6 @@ impl Uncrafter {
             }
             raw_inventory.add(item_name, *count);
         }
-        println!("{:?}", raw_inventory);
         raw_inventory
     }
 
@@ -70,12 +73,13 @@ impl Uncrafter {
         // given an inventory of items, returns which recipes can be crafted
         self.initialize_recipes();
         let uncrafted_inventory = self.uncraft_items_in(inventory);
-        println!("craftable recipes: ");
+        println!("Craftable Recipes: ");
         for (recipe_name, ingredients) in &self.raw_materials_for_recipe {
             let num = uncrafted_inventory.contains_all_x_times(ingredients);
             if num > 0 {
                 println!("{}x {}", num, recipe_name);
             }
         }
+        println!();
     }
 }

@@ -15,8 +15,8 @@ pub fn string_to_option(option: &str) -> Option<String> {
     }
 }
 
-pub fn csv_to_manual_struct() -> Vec<Pattern> {
-    let rdr: Reader<File> = Reader::from_path("recipes.csv").expect("file to be there");
+pub fn csv_to_manual_struct(path: &str) -> Vec<Pattern> {
+    let rdr: Reader<File> = Reader::from_path(path).expect("file to be there");
     let mut patterns: Vec<Pattern> = vec![];
     for record in rdr.into_records() {
         let record = record.expect("CSV row invalid");
