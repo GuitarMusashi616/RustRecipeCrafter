@@ -1,6 +1,11 @@
 name,amount,item_0,item_1,item_2,item_3,item_4,item_5,item_6,item_7,item_8
-pulverizer,1,,piston,,flint,machine frame,flint,copper gear,redstone rec coil,copper gear
-machine frame,1,iron ingot,glass,iron ingot,glass,gold ingot,glass,iron ingot,glass,iron ingot
-copper gear,1,,copper ingot,,copper ingot,iron ingot,copper ingot,,copper ingot,
-redstone rec coil,1,,,redstone,,gold ingot,,redstone,,
-piston,1,wooden planks,wooden planks,wooden planks,cobblestone,iron ingot,cobblestone,cobblestone,redstone,cobblestone
+Allthemodium Solar Panel,2,Photovoltaic Cell IV,Photovoltaic Cell IV,Photovoltaic Cell IV,Solar Panel V,Allthemodium Block,Solar Panel V,Solar Panel V,Block of Diamond,Solar Panel V
+Photovoltaic Cell IV,2,Blazing Coating,Blazing Coating,Blazing Coating,Glowstone Dust,Diamond,Glowstone Dust,Stone,Photovoltaic Cell III,Stone
+Photovoltaic Cell III,2,Glass,Glass,Glass,Glowstone Dust,Glowstone Dust,Glowstone Dust,Obsidian,Photovoltaic Cell II,Obsidian
+Photovoltaic Cell II,2,Clay Ball,Lapis Lazuli,Clay Ball,Lapis Lazuli,Clay Ball,Lapis Lazuli,Mirror,Photovoltaic Cell I,Mirror
+Photovoltaic Cell I,2,Glass,Glass,Glass,Lapis Lazuli,Lapis Lazuli,Lapis Lazuli,Mirror,Mirror,Mirror
+Solar Panel V,2,Photovoltaic Cell III,Photovoltaic Cell III,Photovoltaic Cell III,Solar Panel IV,Glowstone Block,Solar Panel IV,Solar Panel IV,Block of Gold,Solar Panel IV
+Solar Panel IV,2,Photovoltaic Cell II,Photovoltaic Cell II,Photovoltaic Cell II,Solar Panel III,Clock,Solar Panel III,Solar Panel III,Block of Iron,Solar Panel III
+Solar Panel III,2,Photovoltaic Cell I,Photovoltaic Cell I,Photovoltaic Cell I,Solar Panel II,Redstone Repeater,Solar Panel II,Solar Panel II,Block of Iron,Solar Panel II
+Solar Panel II,2,Solar Panel I,Solar Panel I,Solar Panel I,Solar Panel I,Piston,Solar Panel I,Solar Panel I,Solar Panel I,Solar Panel I
+Solar Panel I,2,Mirror,Mirror,Mirror,Iron Ingot,Block of Lapis Lazuli,Iron Ingot,Iron Ingot,Iron Ingot,Iron Ingot

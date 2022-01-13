@@ -30,18 +30,22 @@ impl Uncrafter {
         let recipe = self.recipes_map.get(recipe_name).expect("recipe_name not found");
 
         let mut raw_materials = Backpack::new();
-
         for ingredient in recipe.ingredients.iter().filter_map(|x| x.as_ref()) {
+            raw_materials.add(ingredient, 1);
+        }
+
+        let mut output = Backpack::new();
+        for (ingredient, &count) in raw_materials.contents.iter() {
             // println!("{}", ingredient);
             if self.recipes_map.contains_key(ingredient) {
                 // uncraft it an add the result
-                raw_materials += self.uncraft(ingredient, count);
+                output += self.uncraft(ingredient, (count as f64/recipe.amount as f64).ceil() as u32);
                 continue
             }
             // otherwise add the ingredient to the backpack
-            raw_materials.add(ingredient, count);
+            output.add(ingredient, (count as f64/recipe.amount as f64).ceil() as u32);
         }
-        raw_materials
+        output
     }
 
     pub fn initialize_recipes(&mut self) {
@@ -81,5 +85,11 @@ impl Uncrafter {
             }
         }
         println!();
+    }
+
+    pub fn print_recipe(&mut self, item: &str) {
+        self.initialize_recipes();
+
+        println!("Recipe for {}:\n{:#?}", item, self.raw_materials_for_recipe[item].contents);
     }
 }
